@@ -1,18 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test('navega desde la página de inicio hacia el formulario de login', async ({ page }) => {
+  await page.goto('/');
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  await expect(page.getByText('TickeTI Support', { exact: true })).toBeVisible();
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.getByRole('button', { name: 'Ingresar' }).click();
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  await expect(page).toHaveURL(/\/login$/);
+  await expect(page.getByRole('heading', { name: 'Iniciar Sesión' })).toBeVisible();
 });
