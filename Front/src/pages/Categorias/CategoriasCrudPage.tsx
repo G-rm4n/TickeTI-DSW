@@ -107,6 +107,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) 
           <input
             type="text"
             required
+            data-testid="inputNombre"
             name="nombre"
             value={updatedCategoria? updatedCategoria.nombre : categoriaNew?.nombre}
             onChange={handleChange}
@@ -131,6 +132,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) 
             )}
             <button
               type="submit"
+              data-testid="guardarCategoria"
               disabled={guardando}
               className="px-5 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition disabled:opacity-50"
             >
