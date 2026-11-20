@@ -116,15 +116,15 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) 
             className="flex-1 px-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
           />
           <input
-            type="number"
+            type="text"
             required
             name="tiempoLimiteResolucion"
-            value={updatedPrioridad? updatedPrioridad.tiempoLimiteResolucion : (prioridadNew?.tiempoLimiteResolucion||0)}
+            value={updatedPrioridad? updatedPrioridad.tiempoLimiteResolucion : (prioridadNew?.tiempoLimiteResolucion||"")}
             onChange={handleChange}
             placeholder={
               updatedPrioridad
                 ? `Editando tiempo límite de resolución de prioridad #${updatedPrioridad.id}...`
-                : "Tiempo límite de resolución de la nueva prioridad"
+                : "Tiempo límite de resolución de la nueva prioridad en dias"
             }
             className="flex-1 px-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
           />
