@@ -11,7 +11,7 @@ import { IObtenerTicketsParams } from "../../interfaces/IObtenerTickets.params";
 import { ticketPaginatedModel } from "../../models/ticket.model";
 import { getAllEstados } from "../../services/EstadoServices/GetAllEstados";
 import { type IMeta } from "../../responses/IPaginatedApiResponse";
-import { getAllPrioridades } from "../../services/PrioridadServices/GetAllPrioridades";
+import { getAllPrioridades } from "../../services/PrioridadServices/getAllPrioridades";
 import type { prioridadModel } from "../../models/prioridad.model";
 import { eliminarMiTicket } from "../../services/TicketServices/EliminarMiTicket";
 
