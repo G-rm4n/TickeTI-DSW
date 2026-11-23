@@ -31,12 +31,14 @@ export const CategoriaSection: React.FC<ICategoriaSectionProps> = ({ categorias,
               <td className="p-4 text-right space-x-2">
                 <button
                   onClick={() => onEditar(categoria)}
+                  data-testid={`editarCategoria${categoria.id}`}
                   className="px-2.5 py-1 text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100"
                 >
                   Editar
                 </button>
                 <button
                   onClick={() => onEliminar(categoria.id)}
+                  data-testid={`eliminarCategoria${categoria.id}`}
                   className="px-2.5 py-1 text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200 rounded-lg hover:bg-rose-100"
                 >
                   Eliminar

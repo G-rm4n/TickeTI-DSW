@@ -13,9 +13,10 @@ interface AsignacionListProps {
     onAbandonar?: (asignacionId: string | number) => Promise<void>;
     onResolver?: (asignacionId: string | number, solucion: string) => Promise<void>;
     onChangeCategoriaTicket: (ticketId: string | number, nuevaCategoria: string) => Promise<void>;
+    onChangeEstadoTicket: (ticketID: number|string, nuevaCategoria: string) => Promise<void>;
 }
 
-const AsignacionList: React.FC<AsignacionListProps> = ({ asignaciones, onAbandonar, onResolver, onChangeCategoriaTicket, estados, categorias, cargando}) => {
+const AsignacionList: React.FC<AsignacionListProps> = ({ asignaciones, onAbandonar, onResolver, onChangeCategoriaTicket,onChangeEstadoTicket, estados, categorias, cargando}) => {
     return (
         <div className="space-y-3">
             {cargando ? (
@@ -36,6 +37,7 @@ const AsignacionList: React.FC<AsignacionListProps> = ({ asignaciones, onAbandon
                   onEliminar={onAbandonar}
                   onResolver={onResolver}
                   onCambiarCategoria={onChangeCategoriaTicket}
+                  onChangeEstadoTicket={onChangeEstadoTicket}
                 />
               ))
             )}

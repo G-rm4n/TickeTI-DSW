@@ -121,10 +121,11 @@ export const UserDashboardPage: React.FC = () => {
             <h2 className="text-lg font-bold text-slate-800">Generar Solicitud de Incidencia</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-600 uppercase mb-1">
+                <label htmlFor="ticket-title" className="block text-xs font-semibold text-slate-600 uppercase mb-1">
                   Título del problema
                 </label>
                 <input
+                  id="ticket-title"
                   type="text"
                   required
                   value={ticketValues.title}
@@ -135,10 +136,11 @@ export const UserDashboardPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 uppercase mb-1">
+                <label htmlFor="ticket-categoria" className="block text-xs font-semibold text-slate-600 uppercase mb-1">
                   Categoría del Incidente
                 </label>
                 <select
+                  id="ticket-categoria"
                   value={ticketValues.categoria}
                   onChange={(e) => setTicketValue({ ...ticketValues, categoria: Number(e.target.value) })}
                   className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white text-slate-700"
@@ -153,10 +155,11 @@ export const UserDashboardPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 uppercase mb-1">
+                <label htmlFor="ticket-prioridad" className="block text-xs font-semibold text-slate-600 uppercase mb-1">
                   Prioridad del Incidente
                 </label>
                 <select
+                  id="ticket-prioridad"
                   value={ticketValues.prioridad}
                   onChange={(e) => setTicketValue({ ...ticketValues, prioridad: Number(e.target.value) })}
                   className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white text-slate-700"
@@ -171,10 +174,11 @@ export const UserDashboardPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 uppercase mb-1">
+                <label htmlFor="ticket-description" className="block text-xs font-semibold text-slate-600 uppercase mb-1">
                   Descripción detallada
                 </label>
                 <textarea
+                  id="ticket-description"
                   required
                   rows={3}
                   value={ticketValues.description}

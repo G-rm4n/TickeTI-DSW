@@ -29,10 +29,11 @@ return (
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="text-sm font-medium text-gray-700">
                 E-mail
               </label>
               <input
+                id="email"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -43,10 +44,11 @@ return (
             </div>
 
             <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-gray-700">
+              <label htmlFor="pass" className="text-sm font-medium text-gray-700">
                 Contraseña
               </label>
               <input
+                id="pass"
                 type={verPass ? "text" : "password"}
                 name="pass"
                 value={formData.pass}

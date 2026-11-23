@@ -13,6 +13,7 @@ import { estadoModel } from "../../models/estado.model";
 import { CategoriaModel } from "../../models/categoria.model";
 import { Pagination } from "../../components/Pagination";
 import { CambiarCategoria } from "../../services/TicketServices/CambiarCategoria";
+import {cambiarEstadoTicket} from "../../services/TicketServices/CambiarEstadoTicket";
 import { filterIntermediateStates } from "../../helpers/FilterEstadosIntermedios";
 
 const MisAsignacionesPage:React.FC=()=>{
@@ -48,7 +49,11 @@ const MisAsignacionesPage:React.FC=()=>{
     const handleAbandonar = async (asignacionId: number|string) => {
             await abandonarAsignacion(asignacionId);
             cargarAsignaciones(paginadoParams);
-            alert("Asignación abandonada correctamente");
+    }
+
+    const handleCambiarEstado = async (ticketId: number|string,estadoId:number|string)=>{
+        await cambiarEstadoTicket(ticketId,estadoId);
+        cargarAsignaciones(paginadoParams);
     }
 
     const cargarEstados = async () => {
@@ -100,7 +105,7 @@ const MisAsignacionesPage:React.FC=()=>{
                         />
                       )}
 
-                <AsignacionList cargando={cargando} categorias={categorias} estados={estados} onChangeCategoriaTicket={handleCambiarCategoria} asignaciones={asignaciones} onResolver={handleResolver} onAbandonar={handleAbandonar}>
+                <AsignacionList cargando={cargando} categorias={categorias} estados={estados} onChangeEstadoTicket={handleCambiarEstado} onChangeCategoriaTicket={handleCambiarCategoria} asignaciones={asignaciones} onResolver={handleResolver} onAbandonar={handleAbandonar}>
                 </AsignacionList>
 
                 {meta && meta.totalItems > meta.itemsPerPage && (

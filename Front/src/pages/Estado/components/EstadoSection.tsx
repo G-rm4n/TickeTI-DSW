@@ -21,6 +21,7 @@ export const EstadoSection: React.FC<IEstadoSectionProps> = ({ estados, cargando
         <thead>
           <tr className="border-b border-slate-100 text-xs font-bold text-slate-500 uppercase bg-slate-50">
             <th className="p-4">Nombre</th>
+            <th className="p-4">Descripccion</th>
             <th className="p-4 text-right">Acciones</th>
           </tr>
         </thead>
@@ -28,6 +29,7 @@ export const EstadoSection: React.FC<IEstadoSectionProps> = ({ estados, cargando
           {estados.map((estado) => (
             <tr key={estado.id} className="hover:bg-slate-50/70">
               <td className="p-4 font-medium text-slate-800">{estado.nombre}</td>
+              <td className="P-4 font-medium text-slate-800">{estado.descripcion}</td>
               <td className="p-4 text-right space-x-2">
                 <button
                   onClick={() => onEditar(estado)}

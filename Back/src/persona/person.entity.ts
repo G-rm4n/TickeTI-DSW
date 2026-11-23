@@ -1,41 +1,41 @@
-import { defineEntity , p, type EventArgs, type InferEntity } from "@mikro-orm/core";
+import { defineEntity, p, type EventArgs, type InferEntity } from "@mikro-orm/core";
 import { TicketSchema } from "../ticket/ticket.entity.js";
 import { EmpresaSchema } from "../empresa/empresa.entity.js";
 import { OficinaSchema } from "../oficinas/oficina.entity.js";
 
-export const PersonSchema=defineEntity({
-    name:'person',
-    discriminatorColumn:"type",
-    abstract:true,
-    properties:{
-        dni:p.string().primary(),
-        surName:p.string(),
-        name:p.string(),
-        tele:p.string(),
-        mail:p.string(),
-        pass:p.string(),
-        type:p.string(),
-        tickets:() => p.oneToMany(TicketSchema).mappedBy('usuario').nullable(),
-        empresa:()=> p.manyToOne(EmpresaSchema).nullable().deleteRule('cascade'),
-        oficina:()=>p.manyToOne(OficinaSchema).deleteRule("set null").inversedBy('usuarios').nullable(),
+export const PersonSchema = defineEntity({
+    name: 'person',
+    discriminatorColumn: "type",
+    abstract: true,
+    properties: {
+        dni: p.string().primary(),
+        surName: p.string(),
+        name: p.string(),
+        tele: p.string(),
+        mail: p.string(),
+        pass: p.string(),
+        type: p.string(),
+        tickets: () => p.oneToMany(TicketSchema).mappedBy('usuario').nullable(),
+        empresa: () => p.manyToOne(EmpresaSchema).nullable().deleteRule('cascade'),
+        oficina: () => p.manyToOne(OficinaSchema).deleteRule("set null").inversedBy('usuarios').nullable(),
     },
 });
 
 
-export class Person extends PersonSchema.class {}
+export class Person extends PersonSchema.class { }
 PersonSchema.setClass(Person);
 
 
 export type PersonType = InferEntity<typeof PersonSchema>
 
-PersonSchema.addHook('beforeCreate',async(args:EventArgs<PersonType> )=>{
-    const person=args.entity;
+PersonSchema.addHook('beforeCreate', async (args: EventArgs<PersonType>) => {
+    const person = args.entity;
 
-    const InitialNameLetter=person.name[0]?.toLowerCase();
+    const InitialNameLetter = person.name[0]?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-    const baseMail=InitialNameLetter+person.surName.substring(0,5).toLowerCase();
+    const baseMail = InitialNameLetter + person.surName.substring(0, 5).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-    const count=await args.em.count(PersonSchema,{mail:{$like:`${baseMail}%`}});
+    const count = await args.em.count(PersonSchema, { mail: { $like: `${baseMail}%` } });
 
-    person.mail=baseMail+String(count)+String(person.empresa?.id)+"@ticketi.com";
+    person.mail = baseMail + String(count) + String(person.empresa?.id) + "@ticketi.com";
 })
