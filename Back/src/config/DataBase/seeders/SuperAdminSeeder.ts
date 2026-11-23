@@ -9,6 +9,8 @@ dotenv.config();
 export class SuperAdminSeeder extends Seeder {
     async run(em: EntityManager): Promise<void> {
         
+        const empresas =em.setFilterParams('empresa',{bypass:true});
+
         const superAdminExistente = await em.findOne(PersonSchema, { 
             dni: '00000000' 
         });

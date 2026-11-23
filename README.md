@@ -45,7 +45,8 @@ TickeTI conecta a usuarios solicitantes, técnicos de soporte, administradores d
 | Ruteo               | React Router                          |
 | Estilos             | Tailwind CSS + PostCSS                |
 | Testing E2E         | Playwright                            |
-| HTTP & Estado       | Fetch API / Axios + React AuthContext |
+| HTTP & Estado       | Fetch API  + React AuthContext |
+|Notificaciones de estado | Sonner |
 
 ---
 ## 👥 Funcionalidades por rol
@@ -53,12 +54,12 @@ TickeTI conecta a usuarios solicitantes, técnicos de soporte, administradores d
 - **Usuario (Solicitante)**:
   - Crear, editar y consultar sus propios tickets de soporte.
   - Visualizar el estado de resolución, historial de cambios y asignaciones asociadas a su ticket.
-  - Filtrar tickets por estado, prioridad o categoría.
+  - Filtrar tickets por estado o categoria.
 
 - **Técnico**:
   - Visualizar los tickets asignados y la cola de solicitudes pendientes en la organización.
   - Aceptar/Tomar asignaciones de tickets e iniciar trabajos de reparación.
-  - Modificar el estado del ticket (en progreso, resuelto, cerrado) o transferir/abandonar la asignación.
+  - Modificar el estado del ticket (en progreso, resuelto, cerrado), abandonar la asignación, registrar solucion.
 
 - **Administrador de Empresa (Admin)**:
   - Gestionar el personal de la empresa (Creación, modificación y baja de Usuarios y Técnicos).
@@ -152,7 +153,7 @@ cd Back
 npm install
 ```
 
-Crear un archivo `.env` en la carpeta `Back` basándose en el ejemplo:
+Crear un archivo `.env.development` en la carpeta `Back` basándose en el ejemplo:
 
 ```env
 PORT=3000
@@ -162,6 +163,7 @@ DB_USER=root
 DB_PASSWORD=tu_password
 DB_NAME=ticketi_db
 JWT_SECRET=tu_clave_secreta_jwt
+CRON_SCHEDULE=0 0 0 1 * * // Ejecucion de tarea asincronica cada dia.
 ```
 ### 3. Configurar y levantar el Frontend
 En otra terminal:
@@ -201,7 +203,13 @@ Para ejecutar los seeders del backend:
 
 ```bash
 cd Back
-npm run seed
+npm run poblar
+```
+
+En caso de querer solo cargar al super admin:
+```bash
+cd back
+npm run poblar:admin
 ```
 
 Esto generará automáticamente:
@@ -217,7 +225,7 @@ Esto generará automáticamente:
 
 1. El usuario envía sus credenciales mediante `POST /auth/login`.
 2. El backend verifica las credenciales y responde con un **JWT Token** que contiene la identidad y el rol del usuario.
-3. El frontend almacena el token en el `AuthContext` y lo adjunta en los encabezados `Authorization: Bearer <token>` de las peticiones subsiguientes.
+3. El frontend almacena el token en el `AuthContext` y lo adjunta en las cookies de las peticiones siguientes en `AccessToken`.
 4. El componente `<ProtectedRoute/>` en React evalúa si el usuario autenticado posee el rol requerido para acceder a las vistas especificadas.
 ---
 ## 🗺 Mapa de rutas y Endpoints
@@ -237,7 +245,7 @@ Esto generará automáticamente:
 | `/tecnico`          | `Tecnico`              | Dashboard técnico y métricas                     |
 | `/mis-asignaciones` | `Tecnico`              | Lista de tickets asignados al técnico            |
 | `/Mis-tickets`      | `Usuario`, `Tecnico`   | Panel general de tickets creados                 |
-| `/ajustes`          | Todos los autenticados | Cambio de contraseña y perfil                    |
+| `/ajustes`          | Todos los autenticados | Cambio de contraseña                    |
 ### Endpoints principales del Backend (`Back/src/`)
 
 - **Autenticación**: `POST /auth/login`
@@ -254,7 +262,7 @@ Esto generará automáticamente:
 TickeTI-DSW/
 ├── Back/                           # Código del Backend (Node.js + Express)
 │   ├── src/
-│   │   ├── admin/                  # Módulo de administración
+│   │   ├── admin/                  # Módulo de obsoleto
 │   │   ├── asignacion/             # Módulo de asignaciones técnico-ticket
 │   │   ├── auth/                   # Módulo de autenticación (Login/JWT)
 │   │   ├── categoria/              # CRUD de categorías
