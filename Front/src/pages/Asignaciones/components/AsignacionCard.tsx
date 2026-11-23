@@ -7,10 +7,10 @@ interface AsignacionCardProps {
     asignacion:asignacionModel;
     categorias: CategoriaModel[];
     estados: estadoModel[];
-    onChangeEstadoTicket?: (asignacionId: number|string, nuevoEstado: string) => Promise<void>;
+    onChangeEstadoTicket?: (ticketId:number|string, nuevoEstado: string) => Promise<void>;
     onEliminar?: (asignacionId: number|string) => Promise<void>;
     onResolver?: (asignacionId: number|string,solucion: string) => Promise<void>;
-    onCambiarCategoria: (asignacionId: number|string, nuevaCategoria: string) => Promise<void>;
+    onCambiarCategoria: (ticketID: number|string, nuevaCategoria: string) => Promise<void>;
 }
 
 
@@ -107,6 +107,14 @@ const AsignacionCard:React.FC<AsignacionCardProps>=({asignacion,categorias,estad
             className="px-3 py-1.5 text-xs font-semibold text-teal-700 bg-teal-50 hover:bg-teal-100 border border-teal-200/80 rounded-xl transition shadow-xs"
           >
             Cambiar categoría
+          </button>
+
+          <button
+          type="button"
+          onClick={()=>{handleTipoInput('estado')}}
+          className="px-3 py-1.5 text-xs font-semibold text-yellow-700 bg-yellow-50 hover:bg-yellow-100 border border-yellow-200/80 rounded-xl transition shadow-xs"
+          >
+            Cambiar estado
           </button>
           
 

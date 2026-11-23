@@ -9,7 +9,7 @@ export const CambiarPassForm = () => {
         { id: "minus", texto: "Una letra minúscula", cumple: (p: string) => /[a-z]/.test(p) },
         { id: "numero", texto: "Un número", cumple: (p: string) => /\d/.test(p) },
         { id: "simbolo", texto: "Un símbolo (ej: ! @ # $ %)", cumple: (p: string) => /[^A-Za-z0-9]/.test(p) },
-        { id: "Igualdad", texto: "Las contraseñas deben coincidir", cumple: (p: string) => p === confirmar }
+        { id: "Igualdad", texto: "Las contraseñas deben coincidir", cumple: (p: string) => p === confirmar && p.trim()!="" && confirmar.trim()!=""}
     ];
     
 
