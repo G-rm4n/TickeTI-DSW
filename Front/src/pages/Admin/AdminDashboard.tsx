@@ -5,7 +5,7 @@ import type { IObtenerTicketsParams } from "../../interfaces/IObtenerTickets.par
 import { obtenerTicketsPaginado } from "../../services/TicketServices/ObtenerTicketsPaginado";
 import type { CategoriaModel } from "../../models/categoria.model";
 import type { prioridadModel } from "../../models/prioridad.model";
-import { getAllPrioridades } from "../../services/PrioridadServices/GetAllPrioridades"; 
+import { getAllPrioridades } from "../../services/PrioridadServices/getAllPrioridades"; 
 import type { estadoModel } from "../../models/estado.model";
 import type { IMeta } from "../../responses/IPaginatedApiResponse";
 import { cambiarEstadoTicket } from "../../services/TicketServices/CambiarEstadoTicket";

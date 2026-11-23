@@ -12,7 +12,7 @@ import { getAllEstados } from "../../services/EstadoServices/GetAllEstados";
 import { type IMeta } from "../../responses/IPaginatedApiResponse";
 import { crearAsignacion } from "../../services/AsignacionServices/CrearAsignacion";
 import { prioridadModel } from "../../models/prioridad.model";
-import { getAllPrioridades } from "../../services/PrioridadServices/GetAllPrioridades";
+import { getAllPrioridades } from "../../services/PrioridadServices/getAllPrioridades";
 import { CambiarCategoria } from "../../services/TicketServices/CambiarCategoria";
 
 export const TecnicoPage: React.FC = () => {

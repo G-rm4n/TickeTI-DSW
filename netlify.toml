@@ -1,0 +1,21 @@
+# The deployable site is the Vite + React frontend in Front/.
+# (Back/ is a separate Express + MySQL API and is not part of this deploy.)
+[build]
+  base = "Front"
+  # Install dependencies as part of the command so the build also works in
+  # environments that don't run an install step before the build.
+  command = "pnpm install --no-frozen-lockfile && pnpm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  # Front/pnpm-lock.yaml is missing dependencies that package.json now lists
+  # (sonner, vitest, @playwright/test, @types/node), so a frozen install fails.
+  # Remove this once the lockfile is regenerated and committed.
+  PNPM_FLAGS = "--no-frozen-lockfile"
+
+# The app uses client-side routing (BrowserRouter), so serve index.html for deep links.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
