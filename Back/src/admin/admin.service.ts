@@ -15,10 +15,11 @@ export class adminService {
     return await adminDAO.findAll({});
   }
 
-  static async updateAdmin(adminInput: ModifyAdminBodyDTO, dni: string) {
+  static async updateAdmin(adminInput: ModifyAdminBodyDTO & { pass?: string }, dni: string) {
     const adminfound = await adminDAO.findOne({ dni: dni });
-    if (!adminfound) throw new NotFoundError("Administrador no encontrado", `El administrador con el dni ${dni} no fue encontrado`);
-    return await adminDAO.updateAdmin(adminInput, adminfound);
+    if (!adminfound) throw new NotFoundError("Administrador no encontrado", "El administrador con el dni ${dni} no fue encontrado");
+    const dataToUpdate = adminInput.pass ? { ...adminInput, pass: await hashPassword(adminInput.pass) } : adminInput;
+    return await adminDAO.updateAdmin(dataToUpdate, adminfound);
   }
 
   
