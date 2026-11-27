@@ -46,8 +46,7 @@ app.use(Express.json());
 app.use(cookieParser())
 
 app.use((req,res,next)=>{
-    RequestContext.create(orm.em,next)
-    next();
+    RequestContext.create(orm.em,next);
 });
 
 // Usar Rutas

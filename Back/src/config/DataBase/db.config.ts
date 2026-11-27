@@ -22,6 +22,7 @@ import { defineConfig } from '@mikro-orm/core';
 
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
+const idDev= process.env.NODE_ENV === 'development';
 config({ path: envFile });
 
 const options:Options={
@@ -43,10 +44,10 @@ const options:Options={
         defaultSeeder:'DatabaseSeeder',
         glob: '!(*.d).{js,ts}'
       },
-      driverOptions: {
-          ssl: {
-            rejectUnauthorized: true,
-          },
+      driverOptions: idDev ? {} : {
+        ssl: {
+          rejectUnauthorized: true
+        }
       },
       filters:{
         empresa:{cond:args=>{
