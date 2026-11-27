@@ -20,7 +20,7 @@ export const swaggerOptions: swaggerJsdoc.Options = {
 
     servers: [
       {
-        url: 'http://localhost:3000/api',
+        url: process.env.BACKEND_URL ?? 'http://localhost:3000/api',
       },
     ],
   },
