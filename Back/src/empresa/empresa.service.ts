@@ -11,17 +11,22 @@ import { hashPassword } from "../utils/password.js";
 export class EmpresaService {
   static async createEmpresa(empresaInput: CreateEmpresaInDto) {
 
-    const empresa=await empresaDAO.createEmpresa(empresaInput);
+    const { admin: adminInput, ...empresaData } = empresaInput;
+    const empresa = await empresaDAO.createEmpresa(empresaData);
 
-    Promise.all([
+    await Promise.all([
       EstadoDAO.createInitialStates(empresa.id),
       prioridadDAO.createInitialPrioridades(empresa.id),
       categoriaDAO.createInitialCategorias(empresa.id)
     ]);
 
-    if(empresaInput.admin){
-        var admin={...empresaInput.admin,empresaId:empresa.id}
-        await adminDAO.createAdmin(admin);
+    if (adminInput) {
+      const admin = {
+        ...adminInput,
+        pass: await hashPassword(adminInput.pass),
+        empresa: empresa.id
+      };
+      await adminDAO.createAdmin(admin);
     }
 
     return empresa;
