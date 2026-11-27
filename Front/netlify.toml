@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://ticketi--ticketi-dsw--tpz8wksvjhh4.code.run/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
