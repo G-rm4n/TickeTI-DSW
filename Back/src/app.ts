@@ -29,7 +29,9 @@ const app = Express();
 
 // Conectar DB
 await initOrm();
-await syncSchema();
+if(process.env.NODE_ENV !== 'production') {
+    await syncSchema();
+}
 await checkDb();
 
 zod.config(es());
@@ -45,7 +47,8 @@ app.use(cookieParser())
 
 app.use((req,res,next)=>{
     RequestContext.create(orm.em,next)
-})
+    next();
+});
 
 // Usar Rutas
 //app.use('/api', ticketRoutes);

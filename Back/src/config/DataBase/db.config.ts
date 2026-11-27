@@ -43,6 +43,11 @@ const options:Options={
         defaultSeeder:'DatabaseSeeder',
         glob: '!(*.d).{js,ts}'
       },
+      driverOptions: {
+          ssl: {
+            rejectUnauthorized: true,
+          },
+      },
       filters:{
         empresa:{cond:args=>{
           if (args.bypass) {
