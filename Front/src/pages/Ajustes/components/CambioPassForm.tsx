@@ -72,7 +72,7 @@ export const CambiarPassForm = () => {
                 <div className="relative">
                     <input type={mostrarNueva ? "text" : "password"} value={nueva} onChange={(e) => setNueva(e.target.value)} className="w-full px-3 py-2 pr-10 border border-slate-200 dark:border-slate-600 rounded-lg text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
 
-                    <button type="button" onClick={() => setMostrarNueva(!mostrarNueva)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:text-slate-300 dark:hover:text-white" aria-label={mostrarNueva ? "Ocultar contraseña" : "Mostrar contraseña"} >
+                    <button type="button" onClick={() => setMostrarNueva(!mostrarNueva)} className="p-1.5 absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:text-slate-300 dark:hover:text-white" aria-label={mostrarNueva ? "Ocultar contraseña" : "Mostrar contraseña"} >
                         {mostrarNueva ? (
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M3 3l18 18" />
@@ -96,9 +96,9 @@ export const CambiarPassForm = () => {
                 </label>
 
                 <div className="relative">
-                    <input type={mostrarConfirmar ? "text" : "password"} value={confirmar} onChange={(e) => setConfirmar(e.target.value)} className="w-full px-3 py-2 pr-10 border border-slate-200 dark:border-slate-600 rounded-lg text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    <input type={mostrarConfirmar ? "text" : "password"} value={confirmar} onChange={(e) => setConfirmar(e.target.value)} className="w-full px-3 py-2 pr-10 border border-slate-200 dark:border-slate-600 rounded-lg text-sm  bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
 
-                    <button type="button" onClick={() => setMostrarConfirmar(!mostrarConfirmar)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:text-slate-300 dark:hover:text-white" aria-label={mostrarConfirmar ? "Ocultar confirmación" : "Mostrar confirmación"} >
+                    <button type="button" onClick={() => setMostrarConfirmar(!mostrarConfirmar)} className="p-1.5 absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:text-slate-300 dark:hover:text-white" aria-label={mostrarConfirmar ? "Ocultar confirmación" : "Mostrar confirmación"} >
                         {mostrarConfirmar ? (
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M3 3l18 18" />
@@ -131,7 +131,7 @@ export const CambiarPassForm = () => {
                 </ul>
             </div>
 
-            <button type="submit" disabled={cargando || !passValida} className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition disabled:opacity-50">
+            <button type="submit" disabled={cargando || !passValida} className="w-full sm:w-auto px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition disabled:opacity-50">
                 {cargando ? "Guardando..." : "Cambiar contraseña"}
             </button>
         </form>
