@@ -60,12 +60,13 @@ export const App = () => {
         <Route element={<ProtectedRoute rolesPermitidos={["user", "tecnico"]} />}>
           <Route path="/Mis-tickets" element={<UserDashboardPage />} />
         </Route>
-        </Route>
+        
       
         
         {/* Ruta ajustes para todos los usuarios */}
         <Route element={<ProtectedRoute rolesPermitidos={["user", "usuario", "solicitante", "cliente", "s_admin", "superadmin", "admin", "administrador", "tecnico"]} />}>
           <Route path="/ajustes" element={<AjustesPage />} />
+        </Route>
         </Route>
       </Routes>
     </div>
